@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="utf-8" />
+   <title>JS-ADV. Lesson 1. Task 2 </title>
+</head>
+<body>
+  <div class="wrap" id="app">
+
+    <header>
+      <button>RED</button>
+      <button>BLUE</button>
+      <button>GREEN</button>
+    </header>
+
+    <h2 id="user">Users:</h2>
+    <div class="container">
+      <ul id="list">
+        <li id="JackLi">Jack</li>
+        <li class="show test">Marlyn</li>
+        <li name="Dexter" id="test" class="show test">Dexter</li>
+      </ul>
+    </div>
+    <input id="TestAttribute"/>
+    <div id="createArea" name="block"></div>
+
+  </div>
+
+  <script>
+  
+      Задание:
+
+        // 1. Выбрать как элемент блок с id - test;
+
+        var test = document.getElementById('test')
+        console.log(test)
+  
+        // 2. Выбрать по css селектору все button
+
+        var allButtons = document.querySelectorAll('button')
+        console.log(allButtons)
+
+        // 3. Выбрать родительский элемент .wrap используя точку отсчета блок с с id = createArea.
+
+        var createArea = document.getElementById('createArea');
+        var wrap = createArea.closest('.wrap');
+        console.log(wrap)
+
+        // 4. Выбрать все элементы li по тегу
+
+        var list = document.querySelectorAll('li') //в этом случае возвращает Node List
+        console.log(list)
+
+        var list1 = document.getElementsByTagName('li') // в этом случае возвращает Node Collection. 
+        console.log(list1)
+        // для этого задания какой селектор лучше использовать? По сути получается одинаково? Но в NodeCollection 
+        //выходит больше информации в консоли
+
+        // 5. Выбрать все элементы по классу 'test'
+
+        var test1 = document.querySelectorAll('.test')
+        console.log(test1)
+  
+
+  </script>
+</body>
+</html>
