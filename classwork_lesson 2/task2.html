@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>ITEA-JS ADVANCED - LESSON 2: CLASSWORK 2</title>
+  <link rel="stylesheet" href="css/style.min.css" />
+</head>
+<body>
+  <div class="wrap">
+    <div class="testBlock hover">
+      <button class="iButton" id="mouseHover">1. Hover!</button>
+      <ul id="hoverResult" class="resultBlock">
+       </ul>
+    </div>
+
+    <div class="testBlock click">
+      <button class="iButton" id="mouseClick">2. Click for do things</button>
+      <div id="clickResult" class="resultBlock one two three four five six"></div>
+    </div>
+
+    <div class="testBlock random">
+      <button class="iButton" id="mouseLight" data-color=''>3. Click for turn on lights</button>
+      <div id="lightResult" class="resultBlock"></div>
+    </div>
+
+    <div class="testBlock keyboard">
+      <button class="iButton" id="keyboardButton">4. Press any key</button>
+      <div id="keyboardResult" class="resultBlock key-colors"></div>
+    </div>
+
+  </div>
+
+  <script>
+    /*
+      Поработаем немного с ивентами:
+      onmouseenter
+      onclick
+      oncontextmenu
+      onkeydown
+
+        */
+    //Задание:
+    
+    // На каждую из конопок назначить действие которое будет выполнять следующее действие:
+    //   1.На ховер(onmouseenter) повесить обработчик который будет при каждом наведении
+    //     на кнопку будет выводить в блок результатом елемент li с текстом "hovered!"
+    //     у которого будет один из следующих класов:
+    //     red blue green orange purple
+
+    var mouseHover = document.getElementById('mouseHover');
+    var keyboardButton = document.getElementById('keyboardButton');
+    var hoverResult = document.getElementById('hoverResult')
+    var li = document.createElement('li');
+   
+    mouseHover.onmouseenter = function(){
+        var colors = ['red','blue','orange','orange','purple']
+        li.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)]
+        li.className = colors[Math.floor(Math.random()*colors.length)]
+        li.innerHTML = 'Hovered!'
+        hoverResult.appendChild(li);
+    }
+    
+    console.log(hoverResult)
+    
+    // 2.На кнопку клика(onclick) повесить обработчик который будет удалять классы с
+    //     блока с результатом по очереди в таком порядке:
+
+    //     six > two > three > four > one > five
+
+    //     после того как блок окажется пустым, добавить их в порядке возрастания
+
+    //     one > two > three ... > six
+
+    
+    var mouseClick = document.getElementById('mouseClick');
+    var clickResult = document.getElementById('clickResult');
+
+    var clickIndex = 0;
+    mouseClick.onclick = function(){
+      clickIndex++
+        switch(clickIndex){
+        case 1:clickResult.classList.remove('six');break;
+        case 2:clickResult.classList.remove('two');break;
+        case 3:clickResult.classList.remove('three');break;
+        case 4:clickResult.classList.remove('four');break;
+        case 5:clickResult.classList.remove('one');break;
+        case 6:clickResult.classList.remove('five');break;
+        case 7:clickResult.classList.add('one');break;
+        case 8:clickResult.classList.add('two');break;
+        case 9:clickResult.classList.add('three');break;
+        case 10:clickResult.classList.add('four');break;
+        case 11:clickResult.classList.add('five');break;
+        case 12:clickResult.classList.add('six');break;
+      }
+      console.log(clickIndex)
+    }
+
+    //  3. На кнопку клика (Light) повесить обработчик, который будет выводить в 
+    //   блок с результатом (lightResult) поочередно один из цветов светофора:
+    //   Цикл: Off -> Red -> Yellow -> Green -> Off
+
+    //!!!!!СМОГЛА СДЕЛАТЬ ТОЛЬКО РЕНДОМ. ПОДСКАЖИТЕ, КАК СДЕЛАТЬ ПО-ПОРЯДКУ?!!!!!!
+
+    var mouseLight = document.getElementById('mouseLight');
+    var lightResult = document.getElementById('lightResult')
+       
+    
+       mouseLight.onclick = function(e){
+        var colors = ['red','yellow','green']
+        lightResult.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)]
+       }
+      
+    // 4. На кнопку с обработчиком нажатия (onkeydown) повесить обработчик который будет:
+
+    //     - Выводить в блок с результатом(keyboardResult) число нажатий на любую из клавиш клавиатуры.
+    //     - Давать блоку (keyboardResult) классы, которые соотсветствуют числу кликов:
+
+    //     Н-р:
+    //     1 -> one
+    //     3 -> three
+    //     5 -> five
+    //     11 -> one one
+    //     115 -> one one five
+
+
+    //!!!!!ПОДСКАЖИТЕ, ПОЖАЛУЙСТА, КАК ПЕРЕВЕСТИ ЦИФРЫ В ТЕКСТ. Я ВЫВОЖУ ПОКА ВСЁ ТОЛЬКО В ЦИФРАХ!!!!!
+    
+    keyboardButton = document.getElementById('keyboardButton');
+    keyboardResult = document.getElementById('keyboardResult');
+
+    keyboardButton.onkeydown = function(event){
+     event = clickIndex;
+     clickIndex++
+     console.log(clickIndex)
+     keyboardResult.innerHTML = clickIndex
+     if(keyboardResult.innerHTML == clickIndex){
+     keyboardResult.classList = ('resultBlock key-colors '+keyboardResult.innerHTML)
+     }     
+    }
+
+
+
+  </script>
+</body>
+</html>
