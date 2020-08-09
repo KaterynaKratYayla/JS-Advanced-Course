@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Form work1</title>
+  <script>
+    /*
+      Задание:
+        Сделать шиблонизатор элемента по:
+        Ширине input type=range
+        Цвету  input type=color
+        Высоте input type=number
+        Скругление углов input type=number
+        Margin input type=number
+
+      Свойсвта: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Properties_Reference
+
+        + Сделать выборку цвета из рандомных 20 цветов которые выбираются из появившегося блока :
+        https://s3.envato.com/files/230412754/screenshots/1.png
+        За заготовку для рандома цвета использовать функцию из первых занятий.
+
+    */
+
+    window.addEventListener("load", function () {
+      var myWidth = document.getElementById('myWidth');
+
+      myWidth.addEventListener('input', function(event){
+        console.log( event.target.value );
+        result.style.width = event.target.value + 'px';
+      });
+    });
+
+    window.addEventListener("load", function () {
+      var myColor = document.getElementById('myColor');
+
+      myColor.addEventListener('input', function(event){
+        console.log( event.target.value );
+        result.style.backgroundColor = event.target.value ;
+        console.log(result.style.backgroundColor)
+      });
+    });
+
+    window.addEventListener("load", function () {
+      var myHeight = document.getElementById('myHeight');
+
+      myHeight.addEventListener('input', function(event){
+        console.log( event.target.value );
+        result.style.height = event.target.value + 'px';
+      });
+    });
+
+    window.addEventListener("load", function () {
+      var myCorners = document.getElementById('myCorners');
+
+      myCorners.addEventListener('input', function(event){
+        console.log( event.target.value );
+        result.style.borderRadius = event.target.value + 'px';
+      });
+    });
+
+    window.addEventListener("load", function () {
+      var myMargins = document.getElementById('myMargins');
+
+      myMargins.addEventListener('input', function(event){
+        console.log( event.target.value );
+        result.style.margin = event.target.value + 'px';
+      });
+    });
+
+    window.addEventListener('load',function(){
+    var circles = document.querySelectorAll('.circle')
+    
+    circles.forEach(function(round){
+    var x = Math.floor(Math.random()*256);
+    var y = Math.floor(Math.random()*256);
+    var z = Math.floor(Math.random()*256);
+    var bgColor = 'rgb(' + x + ',' + y + ',' + z +')';
+    round.style.background = bgColor
+
+      round.addEventListener('click',function(event){
+      var randomColor = event.target.style.backgroundColor;
+      console.log(randomColor);
+      result.style.backgroundColor = randomColor;
+      })
+     })
+    })
+
+     
+
+  </script>
+</head>
+<body>
+  <div class="Templating">
+    <form>
+      <input type="range" id="myWidth" min="10" max="500" step="10"/>
+      <input type="color" id="myColor" min="10" max="500" step="10"/>
+      <input type="range" id="myHeight" min="10" max="500" step="10"/>
+      <input type="range" id="myCorners" min="10" max="150" step="3"/>
+      <input type="range" id="myMargins" min="10" max="500" step="10"/>
+    </form>
+
+     <table id='container'>
+      <tr><td><div id='one' class='circle'></div></td>
+          <td><div id='two'class='circle'></div></td>
+          <td><div id='three' class='circle'></div></td>
+          <td><div id='four' class='circle'></div></td>
+          <td><div id='five' class='circle'></div></td>
+      </tr>
+      <tr><td><div id='six' class='circle'></div></td>
+          <td><div id='seven' class='circle'></div></td>
+          <td><div id='eight' class='circle'></div></td>
+          <td><div id='nine' class='circle'></div></td>
+          <td><div id='ten' class='circle'></div></td>
+      </tr>    
+      <tr><td><div id='eleven' class='circle'></div></td>
+          <td><div id='twelve' class='circle'></div></td>
+          <td><div id='thirteen' class='circle'></div></td>
+          <td><div id='fourteen' class='circle'></div></td>
+          <td><div id='fifteen' class='circle'></div></td>
+      </tr>    
+      <tr><td><div id='sixteen' class='circle'></div></td>
+          <td><div id='sevetheen' class='circle'></div></td>
+          <td><div id='eighteen' class='circle'></div></td>
+          <td><div id='nineteen' class='circle'></div></td>
+          <td><div id='twenty' class='circle'></div></td>
+      </tr>
+    </table>
+
+    <div class="TemplatingResult">
+      <div id="result" class="result"></div>
+    </div>
+  </div>
+
+  <style>
+    #colors{
+      width: 200px;
+
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .result{
+      width: 50px;
+      background: gray;
+      box-sizing: border-box;
+      padding: 10px;
+      
+    }
+    #MyValidateForm{
+      width: 350px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #MyValidateForm input{
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      padding: 10px 20px;
+    }
+    
+    #container{
+       margin-right: 40%;
+       float:right;
+       display: block;
+       height: 300px;
+       width: 300px;
+       background-color: rgb(238, 231, 231);
+       overflow: hidden
+      }
+      
+      .circle{
+       display: block;
+       height: 50px;
+       width: 50px;  
+       border-radius: 30px;
+       margin: 9px 5px 5px 1px
+      }
+    
+  </style>
+</body>
+</html>

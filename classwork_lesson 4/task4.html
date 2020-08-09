@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Form work1</title>
+  <script>
+    /*
+      Задание:
+
+      1. Сгенерировать список стран в Select countries
+      2. При выборе страны генерировать еще один Select со списком
+        городов этой страны и вывести этот селект в блок result
+      3. При выборе города нужно случайно рандомить температуру от
+      -10 градусов до +40. Если температура
+
+        -10 до 0 то 'Солнечно' 'Легкий снегопад' 'Сильный снегопад'
+        0 до 30 то  'Солнечно' 'Дождь' 'Ветер' 'Сильный дождь'
+        30 до 40 то 'Солнечно' 'Засуха' 'Ветер'
+
+      4. Вывести сообщение на страничку
+        {Country}. В {City} {Weather} {Temperature} градусов.
+        Ukraine. В Kyiv Солнечно -10 градусов
+
+        + бонус добавить красивые картинки с погодой
+    */
+      window.addEventListener("load", function () {
+      var countriesList = document.getElementById('countriesList')
+      var result = document.getElementById('result')
+
+      var countries = ['Ukraine', 'Poland', 'USA'];
+      var ukraineCity = ['Kyiv', 'Lviv', 'Odesa', 'Kharkiv'];
+      var polandCity = ['Warszawa', 'Poznan', 'Krakow', 'Katowice'];
+      var usaCity = ['New York', 'Los Angeles', 'Las Vegas', 'Chicago'];
+
+      var cDefault = new Option ('Choose country', 'Choose country', true, true)
+      cDefault.disabled = true;
+      countriesList.appendChild(cDefault)
+
+      countries.forEach(function(country){
+        var countryOption = new Option(country,country,false,false)
+        countriesList.appendChild(countryOption)
+        }) 
+
+       var selectCity = document.createElement('select')
+       selectCity.setAttribute('id','selectCity')
+       var cityHolder = new Option ('Choose city', 'Choose city', true, true)
+       cityHolder.disabled = true;
+       countriesList.style.float = 'left'
+       result.appendChild(selectCity).style.display = 'none'
+       
+       countriesList.addEventListener ('change',function(event){
+        result.appendChild(selectCity).style.display = 'block'
+        var eTarget = event.target.value;
+       var cityKey;
+       switch(eTarget){
+         case 'Ukraine': 
+           selectCity.length = 0;
+           selectCity.appendChild(cityHolder)
+           cityHolder.selected = true;
+           ukraineCity.forEach(function(city){
+           cityKey = new Option(city,city,false,false)
+           selectCity.appendChild(cityKey)
+           });break;
+         case 'Poland':
+           selectCity.length = 0;
+           selectCity.appendChild(cityHolder)
+           cityHolder.selected = true;
+           polandCity.forEach(function(city){
+           cityKey = new Option(city,city,false,false)
+           selectCity.appendChild(cityKey)
+            });break;
+         case 'USA':
+           selectCity.length = 0;
+           selectCity.appendChild(cityHolder)
+           cityHolder.selected = true;
+           usaCity.forEach(function(city){
+           cityKey = new Option(city,city,false,false)
+           selectCity.appendChild(cityKey)
+            });break;
+          }
+         } )
+
+      var containerBody = document.querySelector('body') 
+      var outputDiv = document.createElement('div')
+      var weatherImg = document.createElement('img')
+      console.log(containerBody)
+      
+      var photos = {
+        'Cold':'./winter.jpg',
+        'Mild':'./spring.jpg',
+        'Hot':'./summer.jpg'
+      }               
+      
+
+      selectCity.addEventListener('change',function(){
+        containerBody.appendChild(outputDiv)
+        
+        var weather;
+        var min = -10;
+        var max = 40;            
+        var temperature = Math.floor(Math.random()*(max-min+1)+(min))
+
+        if(temperature<=0){
+          weather = 'Cold'
+          outputDiv.innerHTML = 'Country : '+ countriesList.value + ' , city: '+ selectCity.value + ' ; temperature : '+ temperature + " Celsius : 'Солнечно' / 'Легкий снегопад' / 'Сильный снегопад'"
+          }
+        else if(temperature<=30){
+          weather = 'Mild'
+          outputDiv.innerHTML = 'Country : ' + countriesList.value + ' , city: '+ selectCity.value + ' ; temperature : '+ temperature + " Celsius : 'Солнечно' / 'Дождь' / 'Ветер' / 'Сильный дождь'"      
+        }
+        else if(temperature>30){
+          weather = 'Hot'
+          outputDiv.innerHTML = 'Country : ' + countriesList.value + ' , city: '+ selectCity.value + ' ; temperature : '+ temperature + " Celsius : 'Солнечно' / 'Засуха' / 'Ветер'"
+          } 
+        var i=0;
+        for(var key in photos){
+         i++
+         if(weather == key)
+         {
+          outputDiv.appendChild(weatherImg)
+          weatherImg.src = photos[key]}
+          weatherImg.style.float = 'right'
+          }  
+        })
+
+            
+       
+       }) ;   
+      
+  
+  </script>
+</head>
+<body>
+  <select id="countriesList"></select>
+  <div id="result"></div>
+  
+</body>
+</html>
