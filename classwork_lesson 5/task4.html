@@ -1,0 +1,104 @@
+<html>
+    <script>
+/*
+
+  Задание "Шифр цезаря":
+
+    https://uk.wikipedia.org/wiki/%D0%A8%D0%B8%D1%84%D1%80_%D0%A6%D0%B5%D0%B7%D0%B0%D1%80%D1%8F
+
+    Написать функцию, которая будет принимать в себя слово и количество
+    симовлов на которые нужно сделать сдвиг внутри.
+
+    Написать функцию дешефратор которая вернет слово в изначальный вид.
+
+    Сделать статичные функции используя bind и метод частичного
+    вызова функции (каррирования), которая будет создавать и дешефровать
+    слова с статично забитым шагом от одного до 5.
+
+
+    const isMobile = document.innerWidth < 768;
+
+    Например:
+      encryptCesar( 3, 'Word');
+      encryptCesar1(...)
+      ...
+      encryptCesar5(...)
+
+      decryptCesar1(3, 'Sdwq');
+      decryptCesar1(...)
+      ...
+      decryptCesar5(...)
+
+      "а".charCodeAt(); // 1072
+      String.fromCharCode(189, 43, 190, 61) // ½+¾
+word   btwi
+*/
+
+var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+
+function Encryption(a,b) 
+{
+  var word = a.split('');
+  console.log(word)
+ 
+  var Cyphered = [];
+
+  var k;
+ 
+  for(i=0;i<=word.length-1;i++)
+    {
+     for(j=0; j<=this.length-1;j++)
+        {
+         if(word[i] == this[j])
+           {
+                k = j+b;
+                if(k>this.length-1)
+                {
+                    k = k-(this.length-1)-1
+                } 
+                Cyphered.push(this[k]);
+           }
+        }          
+    }
+   console.log(Cyphered)
+
+   console.log(Cyphered.join(''))
+}
+
+var encrypt1 = Encryption.bind(alphabet,'wonderful');
+var test = encrypt1(7) 
+
+function DeCryption(c,d) 
+{
+  var drow = c.split('');
+  console.log(drow)
+ 
+  var DeCyphered = [];
+
+  var m;
+ 
+  for(i=0;i<=drow.length-1;i++)
+    {
+     for(j=0; j<=this.length-1;j++)
+        {
+         if(drow[i] == this[j])
+           {
+                m = j-d;
+                if(m<0)
+                {
+                    m = (this.length-1)+m+1
+                } 
+                DeCyphered.push(this[m]);
+           }
+        }          
+    }
+   console.log(DeCyphered)
+
+   console.log(DeCyphered.join(''))
+}
+
+var encrypt2 = DeCryption.bind(alphabet,'dvuklymbs');
+var test1 = encrypt2(7) 
+
+</script>
+</html>

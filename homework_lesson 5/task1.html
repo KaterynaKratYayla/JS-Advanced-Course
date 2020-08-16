@@ -1,0 +1,90 @@
+<html>
+
+<body>
+    <button id='Likes'>Like Me</button>
+    <!-- <div id="CommentsFeed"></div> -->
+    <button id='Feedback'>Feedback</button>
+    </body>
+
+ <script>
+/*
+  Задание:
+
+
+
+*/
+// 1. Написать конструктор объекта комментария который принимает 3 аргумента
+//     ( имя, текст сообщения, ссылка на аватаку);
+
+//     {
+//       name: '',
+//       text: '',
+//       avatarUrl: '...jpg'
+//       likes: 0
+//     }
+//       + Создать прототип, в котором будет содержаться ссылка на картинку по умлочанию
+//       + В прототипе должен быть метод который увеличивает счетик лайков
+// var myComment1 = new Comment(...);
+
+var clickIndex = 0;
+
+function Comments(name,text,avatarUrl,likes){
+    this.name = name;
+    this.text = text;
+    this.avatarUrl = 'https://static.pexels.com/photos/56875/tree-dawn-nature-bucovina-56875.jpeg';
+    this.likes = function(event) {
+        event = clickIndex;
+        clickIndex++
+        alert(clickIndex)
+     }
+}
+
+var Comment1 = new Comments('John','Fantastic')
+
+var LikeButton = document.getElementById('Likes')
+
+var newFunc = Comment1.likes.bind(Comment1)
+console.log(newFunc)
+
+LikeButton.addEventListener('click', newFunc)
+
+// 2. Создать массив из 4х комментариев.
+//     var CommentsArray = [myComment1, myComment2...]
+
+myComment1 = new Comments('Mary','Good');
+myComment2 = new Comments('Kate','Outstanding');
+myComment3 = new Comments('Patrick','Average');
+myComment4 = new Comments('Sergey','Exceeds Expectations');
+var CommentsArray = [myComment1,myComment2,myComment3,myComment4];
+
+console.log(Object.getPrototypeOf(myComment1))
+
+// 3. Созадть функцию конструктор, которая принимает массив коментариев.
+//       И выводит каждый из них на страничку.
+//     <div id="CommentsFeed"></div>
+
+      var myDiv = document.createElement('div')
+      myDiv.setAttribute = ('id','CommentsFeed')
+      var myBody = document.querySelector('body')
+      var feedbackButton = document.getElementById('Feedback')
+
+function writeComments(array)
+{
+    this.array = array;
+    this.displayComment = function()
+    {
+         array.forEach(function(element)
+         {
+           var myDiv = document.createElement('div')
+           myDiv.setAttribute = ('id','CommentsFeed')
+           myDiv.innerHTML = 'Name : ' + element.name + ' , Rating : ' + element.text
+           myBody.appendChild(myDiv)
+          })
+    }
+}
+
+var depictComments = new writeComments(CommentsArray)
+feedbackButton.addEventListener('click',depictComments.displayComment)
+
+</script>
+    </html>
