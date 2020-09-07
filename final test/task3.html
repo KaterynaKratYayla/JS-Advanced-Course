@@ -1,0 +1,42 @@
+<html>
+<!-- /*
+
+    Задание 1:
+
+    Написать обьект Train у которого будут свойства:
+    -имя,
+    -скорость езды
+    -количество пассажиров
+    Методы:
+    Ехать -> Поезд {name} везет { количество пассажиров} со скоростью {speed}
+    Стоять -> Поезд {name} остановился. Скорость {speed}
+    Подобрать пассажиров -> Увеличивает кол-во пассажиров на Х
+*/ -->
+
+<script>
+var Train = {
+    name: 'Kiev-Odesa',
+    speed: 200,
+    pax_onboard: 0,
+    Move: function Move(){
+        document.write(this.name + ' carries ' + this.pax_onboard + ' pax on board'+' with speed '+ this.speed + ' km per hr.')
+    },
+    byStand: function byStand(){
+        this.speed = 0;
+        document.write('Train ' +  this.name + ' stopped. ' + 'Its speed now is '+ this.speed)
+        return this.speed;
+    },
+    pickUp: function pickUp(x, y){
+        if(y == 0){
+        this.pax_onboard = this.pax_onboard + x ;  
+        }
+       console.log('Now there are '+ this.pax_onboard + ' passengers')
+    }
+}
+
+Train.Move()
+var speedResult = Train.byStand()
+Train.pickUp(7, speedResult)
+
+</script>
+</html>

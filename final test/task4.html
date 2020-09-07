@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+    1. При помощи fetch получить данные:
+     http://www.json-generator.com/api/json/get/cgwbLkTxnS?indent=2
+    2. Полученый ответ преобразовать в json вызвав метод .json с объекта ответа
+    3. На основе данных посторить табличку
+
+    | index | company | email | phone | address |
+
+    4. создать кнопу которая скрывает показывает address
+     -->
+
+<script>
+
+
+
+fetch('http://www.json-generator.com/api/json/get/cgwbLkTxnS?indent=2')
+    .then(function(response){
+        console.log(response);
+        return response.json();
+     })
+        .then(function(data){
+            var myButton = document.createElement('button');
+                myButton.innerHTML = 'Hide Address';
+                document.body.appendChild(myButton);
+            var yourButton = document.createElement('button');
+                yourButton.innerHTML = 'Show Address';
+                document.body.appendChild(yourButton);
+                yourButton.style.display = 'none';
+            var newObj = {index: '|INDEX|',
+                          company: '|COMPANY|',
+                          email: '|EMAIL|',
+                          phone: '|PHONE|',
+                          address: '|ADDRESS|'}
+            data.unshift(newObj);
+            // console.log(data);
+            data.forEach(function(item){
+             let divMain = document.createElement('div');
+             divMain.setAttribute('id','mainDiv');
+             divMain.style.display = 'grid';
+             divMain.style.gridTemplateColumns = '100px 200px 250px 200px 200px';
+             divMain.innerHTML = `
+             <div>${item.index}</div>
+             <div>${item.company}</div>
+             <div>${item.email}</div>
+             <div>${item.phone}</div>
+             <div>${item.address}</div>
+             `
+             document.body.appendChild(divMain);
+
+             myButton.addEventListener('click',function(){
+             myButton.style.display = 'none';
+             yourButton.style.display = 'block';
+             divMain.innerHTML = `
+             <div>${item.index}</div>
+             <div>${item.company}</div>
+             <div>${item.email}</div>
+             <div>${item.phone}</div>
+               `
+                   })      
+            
+            yourButton.addEventListener('click',function(){
+             yourButton.style.display = 'none';
+             myButton.style.display = 'block';
+             divMain.innerHTML = `
+             <div>${item.index}</div>
+             <div>${item.company}</div>
+             <div>${item.email}</div>
+             <div>${item.phone}</div>
+             <div>${item.address}</div>
+               `
+                   })  
+
+                }) 
+            })
+           
+
+   </script>
+
+</body>
+</html>
